@@ -1,0 +1,2 @@
+alias vmi="vim"
+

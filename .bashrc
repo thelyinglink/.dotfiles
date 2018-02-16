@@ -2,6 +2,34 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+if [ $TERM != "dumb" ]; then
+    TERM=xterm-256color
+
+fi
+# Build the prompt 
+# green username 
+PS1="\[\e[01;32m\]\u\[\e[00m\]"
+# literal : 
+PS1="$PS1:"
+# blue working directory 
+PS1="$PS1\[\e[01;34m\]\w\[\e[00m\]"
+# literal $ 
+PS1="$PS1\$ "
+# begin constructing the title bar 
+TITLE_BAR="\[\e]0;"
+# username 
+TITLE_BAR="$TITLE_BAR\u"
+# literal : 
+TITLE_BAR="$TITLE_BAR: "
+# working directory 
+TITLE_BAR="$TITLE_BAR\w"
+# end title bar 
+TITLE_BAR="$TITLE_BAR\a\]"
+# prepend the title bar 
+PS1="$TITLE_BAR$PS1"
+
+
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -56,11 +84,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -104,6 +127,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+export TERM=xterm-256color
+export EDITOR='vim'
+export VISUAL='vim'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

@@ -1,3 +1,5 @@
 alias vmi="vim"
 alias sodu="sudo"
 alias suod="sudo"
+alias lsa="ls -a"
+alias sla="ls -a"
